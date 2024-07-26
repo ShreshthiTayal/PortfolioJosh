@@ -28,10 +28,16 @@ const Footer = () => {
     FaFacebookSquare: <FaFacebookSquare key="facebook" size={25} />,
   };
 
+  const imageMap = {
+    "footer-logo-one.png": footerLogoOne,
+    "footer-logo-two.png": footerLogoTwo,
+    "footer-logo-three.png": footerLogoThree,
+  };
+
   return (
     <>
       <div className={styles.Mainlogo}>
-        <img src={logo} alt="" />
+        <img src={logo} alt="Main Logo" />
       </div>
       <div className={styles.footer}>
         {footerData.map((section, index) => (
@@ -40,7 +46,11 @@ const Footer = () => {
               <div key={idx} className={styles.content}>
                 {item.image && (
                   <div className={styles.imageContainer}>
-                    <img src={item.image} alt="Image" className={styles.image} />
+                    <img
+                      src={imageMap[item.image]}
+                      alt="Footer Logo"
+                      className={styles.image}
+                    />
                     <p className={styles.text}>{item.text}</p>
                   </div>
                 )}
