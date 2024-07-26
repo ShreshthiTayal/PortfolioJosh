@@ -1,0 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav{
+  display: flex;
+  justify-content:space-between;
+
+  
+margin-inline: auto;
+padding: 38px 96px 38px 96px;
+display: flex;
+justify-content: space-between;
+
+
+}
+.img{
+  width:80px;
+  height: 20px;
+  margin-top:20px;
+  margin-left:77px;
+  ;
+
+}
+
+.ul{
+  list-style: none;
+  display: flex;
+  gap:40px;
+  margin-right:100px;
+  margin-top:20px;
+  cursor: pointer;
+  
+}
+.navbar_titles{
+  text-decoration: none;
+  color:black;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+

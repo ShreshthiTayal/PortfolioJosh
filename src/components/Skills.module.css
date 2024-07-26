@@ -1,0 +1,82 @@
+/* Skills.module.css */
+
+.skills {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f4f4f9;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1em;
+  color: #6c757d;
+  margin-bottom: 40px;
+}
+
+.skillsContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.skillsSection {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  width: 300px;
+}
+
+.sectionTitle {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.skill {
+  margin: 20px 0;
+}
+
+.skillHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.skillName {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.level {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+.progress {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progressBar {
+  background-color: #ffc107;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.addSkill {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+}
