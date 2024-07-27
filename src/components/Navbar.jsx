@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import Rectangle from "../assets/Rectangle_181.png";
@@ -18,19 +18,25 @@ const Navbar = () => {
     headings.find((heading) => heading.path === location.pathname)?.id || "1"
   );
 
+  useEffect(() => {
+    setCurrentTitle(
+      headings.find((heading) => heading.path === location.pathname)?.id || "1"
+    );
+  }, [location.pathname]);
+
   return (
     <nav className="nav">
       <img src={Rectangle} width={158} height={76} alt="Logo" />
       <ul className="ul">
-        {headings.map((heading, index) => (
-          <li key={index} onClick={() => setCurrentTitle(heading.id)}>
+        {headings.map((heading) => (
+          <li key={heading.id} onClick={() => setCurrentTitle(heading.id)}>
             <Link to={heading.path}>
               <div
-                className={`py-[10px] px-[14px] rounded-[10px] ${
-                  currentTitle === heading.id ? "bg-yellow-300" : "bg-white"
+                className={`navbar_titles_container ${
+                  currentTitle === heading.id ? "selected" : ""
                 }`}
               >
-                <a className="navbar_titles">{heading.title}</a>
+                <span className="navbar_titles">{heading.title}</span>
               </div>
             </Link>
           </li>
