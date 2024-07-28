@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import heroImage from "../assets/images/right-hero-section.png";
 import { FaArrowRight } from "react-icons/fa6";
-import backgroundImage from "../assets/images/background.png";
 import shapeOne from "../assets/images/1.png";
 import shapeTwo from "../assets/images/2.png";
 import shapeThree from "../assets/images/3.png";
 import shapeFour from "../assets/images/4.png";
 import shapeFive from "../assets/images/5.png";
-import shapeSix from "../assets/images/6.png";
 
 const Hero = () => {
   const handleResize = () => {
@@ -31,9 +29,7 @@ const Hero = () => {
   return (
     <div
       className="relative flex flex-col md:flex-row p-8 md:p-32 bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-      }}
+      
     >
       <div className="relative z-50">
         <div className="absolute top-10 left-9">
@@ -50,9 +46,6 @@ const Hero = () => {
         </div>
         <div className="absolute top-10 left-9">
           <img src={shapeFive} alt="" />
-        </div>
-        <div className="absolute top-10 left-9">
-          <img src={shapeSix} alt="" />
         </div>
       </div>
       {/* Left Column */}

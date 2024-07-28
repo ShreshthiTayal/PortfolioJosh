@@ -9,7 +9,7 @@ body {
 }
 
 .nav {
-  width: 1440px;
+  overflow:hidden;
   height: 152px;
   padding: 38px 96px;
   margin-inline: auto;
@@ -19,6 +19,7 @@ body {
   background-color: white;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-items: center;
 }
 
