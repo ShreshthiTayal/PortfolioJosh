@@ -11,6 +11,7 @@ const Hero = () => {
   const [heroData, setHeroData] = useState({
     title: "",
     subtitle: "",
+    role: "",
     description: "",
     buttonText: "",
   });
@@ -41,7 +42,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col md:flex-row p-8 md:p-32 bg-cover bg-center bg-no-repeat">
+    <div className="relative flex flex-col md:flex-row p-8 md:p-32 bg-white">
       <div className="relative z-50">
         <div className="absolute top-10 left-9">
           <img src={shapeOne} alt="" />
@@ -64,10 +65,10 @@ const Hero = () => {
         <h1 className="text-3xl md:text-5xl font-bold mb-10 ml-5">
           {heroData.title}
           <br />
-          <span className="text-yellow-500">{heroData.subtitle}</span>
+          <span className="text-yellow-500">{heroData.subtitle}</span> <span className="text-black">{heroData.role}</span>
         </h1>
         <p className="text-2l mb-4 ml-5">{heroData.description}</p>
-        <button className="hover:bg-orange-300 hover:text-white bg-white border-2 border-orange-300 text-orange-300 font-bold py-2 px-6 ml-10 mt-10 rounded flex">
+        <button className="hover:bg-yellow-300 hover:text-black bg-yellow border-2 border-yellow-300 text-black-300 font-bold py-2 px-6 ml-10 mt-10 rounded flex">
           <div>{heroData.buttonText}</div>
           <div className="pt-1.5 pl-2">
             <FaArrowRight />
