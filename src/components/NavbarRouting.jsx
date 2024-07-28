@@ -12,7 +12,7 @@ const Navbar = () => {
   const [currentTitle, setCurrentTitle] = useState("1");
 
   useEffect(() => {
-    fetch("http://localhost:3001/navbar")
+    fetch("http://localhost:3001/navbarSkill")
       .then((response) => response.json())
       .then((data) => {
         setNavbarData(data);
