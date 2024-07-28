@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RecommendationCard from './RecommendationsCard';
 import styles from './Recommendations.module.css';
 import profile1 from '../assets/images/profile1.png';
@@ -6,55 +6,26 @@ import profile2 from '../assets/images/profile2.png';
 import profile4 from '../assets/images/profile4.png';
 import Rating from '../assets/images/Rating.png';
 
-const RecommendationsCard = [
-    {
-        id: "rec1",
-        ratingUrl: Rating,
-        heading: "Amazing work!",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae nulla diam in ac dictum a urna viverra morbi. Morbi donec amet....",
-        profileUrl: profile1,
-        name: "Tiana Philips",
-        designation: "Photographer"
-    },
-    {
-        id: "rec2",
-        ratingUrl: Rating,
-        heading: "Great Quality!",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae nulla diam in ac dictum a urna viverra morbi. Morbi donec amet....",
-        profileUrl: profile2,
-        name: "James Gouse",
-        designation: "Graphic Designer"
-    },
-    {
-        id: "rec3",
-        ratingUrl:Rating,
-        heading: "Amazing work!",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae nulla diam in ac dictum a urna viverra morbi. Morbi donec amet....",
-        profileUrl: profile1,
-        name: "Tiana Philips",
-        designation: "Photographer"
-    },
-    {
-        id: "rec4",
-        ratingUrl: Rating,
-        heading: "Great Quality!",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae nulla diam in ac dictum a urna viverra morbi. Morbi donec amet....",
-        profileUrl: profile4,
-        name: "Talan Westervelt",
-        designation: "Business man"
-    },
-    {
-        id: "rec5",
-        ratingUrl: Rating,
-        heading: "Great Quality!",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae nulla diam in ac dictum a urna viverra morbi. Morbi donec amet....",
-        profileUrl: profile2,
-        name: "James Gouse",
-        designation: "Graphic Designer"
-    }
-];
+// Map image file names to imported images
+const profileImages = {
+    'profile1.png': profile1,
+    'profile2.png': profile2,
+    'profile4.png': profile4
+};
+
+const ratingImage = Rating; // Default rating image
+
 export default function Recommendations() {
+    const [recommendations, setRecommendations] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(2); // Center card 3 initially
+
+    useEffect(() => {
+        // Fetch the recommendations data from the backend
+        fetch('http://localhost:3001/recommendations')
+            .then(response => response.json())
+            .then(data => setRecommendations(data))
+            .catch(error => console.error('Error fetching recommendations data:', error));
+    }, []);
 
     const handleDotClick = (index) => {
         setCurrentIndex(index);
@@ -71,13 +42,13 @@ export default function Recommendations() {
             <p className='text-center text-gray-600 my-5 w-[600px] mx-auto'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <div className={styles.carouselContainer}>
                 <div className={styles.carousel} style={{ transform: `translateX(${transformValue}px)` }}>
-                    {RecommendationsCard.map((card) => (
+                    {recommendations.map((card) => (
                         <RecommendationCard
                             key={card.id}
-                            url={card.ratingUrl}
+                            url={ratingImage} // Default rating image
                             heading={card.heading}
                             desc={card.desc}
-                            profileUrl={card.profileUrl}
+                            profileUrl={profileImages[card.profileUrl]} // Map profileUrl to imported image
                             name={card.name}
                             designation={card.designation}
                             className={styles.card}
@@ -85,7 +56,7 @@ export default function Recommendations() {
                     ))}
                 </div>
                 <div className={styles.dots}>
-                    {RecommendationsCard.map((_, index) => (
+                    {recommendations.map((_, index) => (
                         <span
                             key={index}
                             className={`${styles.dot} ${currentIndex === index ? styles.active : ''}`}

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import imageProject1 from "../assets/images/card1.png";
 import imageProject2 from "../assets/images/card2.png";
 import imageProject3 from "../assets/images/card3.png";
@@ -5,56 +6,25 @@ import imageProject4 from "../assets/images/card4.png";
 import imageProject5 from "../assets/images/card5.png";
 import imageProject6 from "../assets/images/card6.png";
 
+const imageMap = {
+    "card1.png": imageProject1,
+    "card2.png": imageProject2,
+    "card3.png": imageProject3,
+    "card4.png": imageProject4,
+    "card5.png": imageProject5,
+    "card6.png": imageProject6,
+};
+
 const Projects = () => {
-  const data = {
-    title: "Projects",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam minus itaque, iste qui cumque sunt minima vero modi aut nulla alias velit omnis, atque sint architecto, quibusdam rerum quia molestiae.",
-    projects: [
-      {
-        id: "card1",
-        url: imageProject1,
-        heading: "How to make Flyer Design",
-        desc: "Lorem ipsum dolor sit amet, consec adipiscing elit awd and lorem ipsum...",
-        tags: ["Typescript", "ReactJs", "NextJs", "CSS", "HTML", "MongoDB"],
-      },
-      {
-        id: "card2",
-        url: imageProject2,
-        heading: "How to make Flyer Design",
-        desc: "Lorem ipsum dolor sit amet, consec adipiscing elit awd and lorem ipsum...",
-        tags: ["Typescript", "ReactJs", "NextJs", "CSS"],
-      },
-      {
-        id: "card3",
-        url: imageProject3,
-        heading: "How to make Flyer Design",
-        desc: "Lorem ipsum dolor sit amet, consec adipiscing elit awd and lorem ipsum...",
-        tags: ["Typescript", "ReactJs", "NextJs", "CSS", "HTML", "MongoDB"],
-      },
-      {
-        id: "card4",
-        url: imageProject4,
-        heading: "How to make Flyer Design",
-        desc: "Lorem ipsum dolor sit amet, consec adipiscing elit awd and lorem ipsum...",
-        tags: ["Typescript", "ReactJs", "NextJs", "CSS", "HTML", "MongoDB"],
-      },
-      {
-        id: "card5",
-        url: imageProject5,
-        heading: "How to make Flyer Design",
-        desc: "Lorem ipsum dolor sit amet, consec adipiscing elit awd and lorem ipsum...",
-        tags: ["Typescript", "ReactJs", "NextJs", "CSS", "HTML", "MongoDB"],
-      },
-      {
-        id: "card6",
-        url: imageProject6,
-        heading: "How to make Flyer Design",
-        desc: "Lorem ipsum dolor sit amet, consec adipiscing elit awd and lorem ipsum...",
-        tags: ["Typescript", "ReactJs", "NextJs", "CSS", "HTML", "MongoDB"],
-      },
-    ],
-  };
+  const [data, setData] = useState({ title: '', description: '', projects: [] });
+
+  useEffect(() => {
+    // Fetch the projects data from the backend
+    fetch('http://localhost:3001/projects')
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error('Error fetching projects data:', error));
+  }, []);
 
   return (
     <div className='bg-[#F0F0F6]'>
@@ -70,7 +40,7 @@ const Projects = () => {
             className='w-[385px] border-[2px] rounded-[12px] flex flex-col gap-1 bg-white boxShadow-customLight h-[432.5px]'
             key={index}
           >
-            <img className='w-[385px] h-[256px]' src={project.url} alt={`Project ${index + 1}`} />
+            <img className='w-[385px] h-[256px]' src={imageMap[project.url]} alt={`Project ${index + 1}`} />
             <h1 className='font-medium text-2xl mx-3'>{project.heading}</h1>
             <p className='text-[#767676] text-[18px] mx-3'>{project.desc}</p>
             <div className='flex gap-2 flex-wrap mx-3'>

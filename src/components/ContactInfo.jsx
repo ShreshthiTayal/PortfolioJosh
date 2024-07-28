@@ -1,34 +1,18 @@
+import React, { useEffect, useState } from 'react';
 import location from "../assets/location.png";
 import Mobile from "../assets/Mobile.png";
 import mail from "../assets/mail.png";
 
 const ContactInfo = () => {
-  const contactData = [
-    {
-      icon: location,
-      fields: [
-        { label: "Country", value: "Bangladesh" },
-        { label: "City", value: "Dhaka" },
-        { label: "Street", value: "35 Vhatara, Badda" }
-      ]
-    },
-    {
-      icon: mail,
-      fields: [
-        { label: "Email:", value: "Youremail@Gmail.Com" },
-        { label: "Skype", value: "@Yourusername" },
-        { label: "Telegram", value: "@Yourusername" }
-      ]
-    },
-    {
-      icon: Mobile,
-      fields: [
-        { label: "Support Services:", value: "15369" },
-        { label: "Office:", value: "+58 (021)356 587 235" },
-        { label: "Personal:", value: "+58 (021)356 587 235" }
-      ]
-    }
-  ];
+  const [contactData, setContactData] = useState([]);
+
+  useEffect(() => {
+    // Fetch the contact data from the backend
+    fetch('http://localhost:3001/contactData')
+      .then(response => response.json())
+      .then(data => setContactData(data))
+      .catch(error => console.error('Error fetching contact data:', error));
+  }, []);
 
   return (
     <div className='h-[759px]'>

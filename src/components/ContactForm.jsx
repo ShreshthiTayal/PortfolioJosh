@@ -1,15 +1,16 @@
+import React, { useEffect, useState } from 'react';
 import "../App.css";
 
 const ContactForm = () => {
-  // Data array to populate the form
-  const formData = [
-    { type: "title", text: "Leave ME Your Info" },
-    { type: "text", label: "Your Full Name (Required)", name: "fullname" },
-    { type: "email", label: "Your Email (Required)", name: "email" },
-    { type: "text", label: "Subject", name: "subject" },
-    { type: "textarea", label: "Your Message", name: "message" },
-    { type: "button", text: "SEND MESSAGE" }
-  ];
+  const [formData, setFormData] = useState([]);
+
+  useEffect(() => {
+    // Fetch the form data from the backend
+    fetch('http://localhost:3001/formData')
+      .then(response => response.json())
+      .then(data => setFormData(data))
+      .catch(error => console.error('Error fetching form data:', error));
+  }, []);
 
   return (
     <div className='h-[759px]'>

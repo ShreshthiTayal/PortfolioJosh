@@ -3,32 +3,40 @@ import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import Rectangle from "../assets/Rectangle_181.png";
 
-const headings = [
-  { id: "1", title: "Home", path: "/" },
-  { id: "2", title: "Skills", path: "/skills" },
-  { id: "3", title: "Education", path: "/education" },
-  { id: "4", title: "Projects", path: "/projects" },
-  { id: "5", title: "Recommendations", path: "/recommendations" },
-  { id: "6", title: "Contact", path: "/contact" },
-];
 
 const Navbar = () => {
   const location = useLocation();
-  const [currentTitle, setCurrentTitle] = useState(
-    headings.find((heading) => heading.path === location.pathname)?.id || "1"
-  );
+  const [navbarData, setNavbarData] = useState({
+    logoUrl: "",
+    headings: []
+  });
+  const [currentTitle, setCurrentTitle] = useState("1");
 
   useEffect(() => {
-    setCurrentTitle(
-      headings.find((heading) => heading.path === location.pathname)?.id || "1"
-    );
+    fetch("http://localhost:3001/navbar")
+      .then((response) => response.json())
+      .then((data) => {
+        setNavbarData(data);
+        setCurrentTitle(
+          data.headings.find((heading) => heading.path === location.pathname)?.id || "1"
+        );
+      })
+      .catch((error) => console.error("Error fetching navbar data:", error));
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (navbarData.headings.length > 0) {
+      setCurrentTitle(
+        navbarData.headings.find((heading) => heading.path === location.pathname)?.id || "1"
+      );
+    }
+  }, [location.pathname, navbarData.headings]);
 
   return (
     <nav className="nav">
       <img src={Rectangle} width={158} height={76} alt="Logo" />
       <ul className="ul">
-        {headings.map((heading) => (
+        {navbarData.headings.map((heading) => (
           <li key={heading.id} onClick={() => setCurrentTitle(heading.id)}>
             <Link to={heading.path}>
               <div

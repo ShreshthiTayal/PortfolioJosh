@@ -1,61 +1,19 @@
+import { useState, useEffect } from "react";
 import styles from './Skills.module.css';
 
 const Skills = () => {
-  const data = {
-    title: "Skills & Languages",
-    description: "Amet Minim Mollit Non Deserunt Ullamco Est Sit Aliqua Dolor Do Amet Sint. Velit Officia Consequat Duis Enim Velit Mollit. Lorem Ipsum",
-    buttonText: "ADD SKILL",
-    sections: [
-      {
-        sectionTitle: "Front End Development",
-        skills: [
-          { skill: "HTML", level: 90 },
-          { skill: "CSS", level: 85 },
-          { skill: "JS", level: 80 },
-          { skill: "PHP", level: 75 },
-          { skill: "WordPress", level: 85 },
-        ]
-      },
-      {
-        sectionTitle: "Languages",
-        skills: [
-          { skill: "Hindi", level: 90 },
-          { skill: "English", level: 85 },
-        ]
-      },
-      {
-        sectionTitle: "Back End Development",
-        skills: [
-          { skill: "NodeJS", level: 90 },
-          { skill: "SSR", level: 85 },
-        ]
-      },
-      {
-        sectionTitle: "Front End Development",
-        skills: [
-          { skill: "HTML", level: 90 },
-          { skill: "CSS", level: 85 },
-          { skill: "JS", level: 80 },
-          { skill: "PHP", level: 75 },
-          { skill: "WordPress", level: 85 },
-        ]
-      },
-      {
-        sectionTitle: "Languages",
-        skills: [
-          { skill: "Hindi", level: 90 },
-          { skill: "English", level: 85 },
-        ]
-      },
-      {
-        sectionTitle: "Back End Development",
-        skills: [
-          { skill: "NodeJS", level: 90 },
-          { skill: "SSR", level: 85 },
-        ]
-      }
-    ]
-  };
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/skills")
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error("Error fetching skills data:", error));
+  }, []);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.skills}>
